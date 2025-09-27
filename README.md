@@ -21,32 +21,21 @@ copied into a real Laravel project or used as a starting point.
 
 3. Install dependencies and Sanctum:
    ```bash
-   composer require laravel/sanctum
-   php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+   composer install
    ```
 
 4. Configure `.env` (database, mail driver `log` for dev, QUEUE_CONNECTION=database or sync)
 
 5. Create queue table and run migrations & seeders:
    ```bash
-   php artisan queue:table
+
    php artisan migrate
    php artisan db:seed
    ```
 
-6. Start a queue worker (if using database queue):
-   ```bash
-   php artisan queue:work
-   ```
-
 7. Run tests:
    ```bash
-   ./vendor/bin/phpunit
+   php artisan test
    ```
 
-## Notes
-- The `PaymentService` is mocked/deterministic: even cents => success, odd => failure.
-- Use DB transactions and row-level locking in production when decrementing ticket quantity.
-- Replace mock payment with Stripe/PayPal in production.
-- Import `postman/EventBooking.postman_collection.json` into Postman to test APIs.
 
