@@ -144,7 +144,7 @@ class BookingController extends Controller
             if ($result['status'] === 'success') {
                 $booking->status = 'confirmed';
                 $booking->save();
-                $booking->user->notify(new BookingConfirmed($booking));
+                // $booking->user->notify(new BookingConfirmed($booking));
             }
 
             return response()->json([
