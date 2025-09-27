@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\EventsController;
+use App\Http\Controllers\API\TicketsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('events', [EventsController::class,'store'])->middleware('role:organizer');
     Route::put('events/{id}', [EventsController::class,'update'])->middleware('role:organizer');
     Route::delete('events/{id}', [EventsController::class,'destroy'])->middleware('role:organizer');
+
+    Route::post('events/{event_id}/tickets', [TicketsController::class,'store'])->middleware('role:organizer');
+    Route::put('tickets/{id}', [TicketsController::class,'update'])->middleware('role:organizer');
+    Route::delete('tickets/{id}', [TicketsController::class,'destroy'])->middleware('role:organizer');
+
 });
 
