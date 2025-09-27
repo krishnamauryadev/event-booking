@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\EventsController;
 use App\Http\Controllers\API\TicketsController;
+use App\Http\Controllers\API\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('tickets/{id}', [TicketsController::class,'update'])->middleware('role:organizer');
     Route::delete('tickets/{id}', [TicketsController::class,'destroy'])->middleware('role:organizer');
 
+    Route::post('tickets/{id}/bookings', [BookingController::class,'store'])->middleware('role:customer')->middleware('prevent.double.booking');
+    Route::get('bookings', [BookingController::class,'index'])->middleware('role:customer');
+    Route::put('bookings/{id}/cancel', [BookingController::class,'cancel'])->middleware('role:customer');
 });
 
